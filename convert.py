@@ -24,21 +24,16 @@ def new_conversion_ID():
     return ID
 
 def convert_files(type_in, type_out,ID, filename="input.md"):
-    input_ext = TYPE_EXTENSION.get(type_in)
-    output_ext = TYPE_EXTENSION.get(type_out)
-
-    if not input_ext or not output_ext:
-        print("Unsupported conversion types")
-        return None
+    output_ext = type_out
 
     PANDOC_DOCKER = False
     PWD = os.getcwd()
     if PANDOC_DOCKER:
         # Call the conversion tool (e.g., pandoc) here
 
-        cmd=f"docker run --rm --volume {PWD}/uploads/{ID}:/data pandoc/extra {filename} -o output.{output_ext}" #--template eisvogel --listings --number-sections"
+        cmd=f"docker run --rm --volume {PWD}/uploads/{ID}:/data pandoc/extra {filename} -o output{output_ext}" #--template eisvogel --listings --number-sections"
     else:
-        cmd=f'pandoc "uploads/{ID}/{filename}" -o uploads/{ID}/output.{output_ext}'# --pdf-engine=xelatex --template eisvogel --listings --number-sections"
+        cmd=f'pandoc "uploads/{ID}/{filename}" -o uploads/{ID}/output{output_ext}'# --pdf-engine=xelatex --template eisvogel --listings --number-sections"
 
     logger.info(PWD)
     logger.info(cmd)
@@ -47,9 +42,14 @@ def convert_files(type_in, type_out,ID, filename="input.md"):
     logger.info(result.stdout.decode("utf-8"))
     if result.stderr:
         logger.error(result.stderr.decode("utf-8"))
-
-    # Return pdf
-    return f"uploads/{ID}/output.{output_ext}"
+        
+    # Check if the file exists
+    if os.path.exists(f"uploads/{ID}/output{output_ext}"):
+        logger.info(f"Conversion successful: uploads/{ID}/output{output_ext}")
+        return f"uploads/{ID}/output{output_ext}"
+    else:
+        logger.error(f"Conversion failed: uploads/{ID}/output{output_ext} not found")
+        return False
 
 # Remove folders created over 24 hours ago
 HOUR_OLD = 0.1

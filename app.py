@@ -35,7 +35,7 @@ SupportedFileTypes = {
     "JSON": ".json",
     "LaTeX": ".tex",
     "OpenDoc": ".odt",
-    "Rich Text": ".rtf"
+    "RichText": ".rtf"
 }
 
 SupportedOutputFileTypes_EXTRA = {
@@ -46,7 +46,7 @@ SupportedOutputFileTypes_EXTRA = {
     "JSON": ".json",
     "LaTeX": ".tex",
     "OpenDoc": ".odt",
-    "Rich Text": ".rtf",
+    "RichText": ".rtf",
     "PDF": ".pdf",
     "PowerPoint": ".pptx"
 }
@@ -119,8 +119,11 @@ def convert(input_format, output_format):
     input_type = request.cookies.get("input_type", "Markdown")   # default = Markdown
     output_type = request.cookies.get("output_type", "PDF") # default = PDF
 
-    output_file = convert_files(input_format, output_format, ID, filename=uploaded_file.filename)
+    output_file = convert_files(SupportedFileTypes[input_format], SupportedOutputFileTypes[output_format], ID, filename=uploaded_file.filename)
 
+    if not output_file:
+        return render_template("conversion.html", ID=None, FILE_IN=input_type, FILE_OUT=output_type, SupportedFileTypes=SupportedFileTypes, SupportedOutputFileTypes=SupportedOutputFileTypes, error=True)
+    
     return render_template("conversion.html", ID=ID, FILE_IN=input_type, FILE_OUT=output_type, SupportedFileTypes=SupportedFileTypes, SupportedOutputFileTypes=SupportedOutputFileTypes)
     return send_file(
         output_file,
