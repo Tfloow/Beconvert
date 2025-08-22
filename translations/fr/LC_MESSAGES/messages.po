@@ -1,53 +1,185 @@
-# French translations for .
+# French translations for PROJECT.
 # Copyright (C) 2025 ORGANIZATION
-# This file is distributed under the same license as the  project.
+# This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version:  \n"
+"Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-22 13:33+0200\n"
-"PO-Revision-Date: 2025-08-22 13:33+0200\n"
+"POT-Creation-Date: 2025-08-22 22:11+0200\n"
+"PO-Revision-Date: 2025-08-22 22:12+0200\n"
 "Last-Translator: \n"
+"Language-Team: fr <LL@li.org>\n"
 "Language: fr\n"
-"Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Generated-By: Babel 2.17.0\n"
+"X-Generator: Poedit 3.7\n"
 
-#: ../templates/base.html:23 ../templates/base.html:32
+#: ../templates/base.html:23 ../templates/base.html:35
 msgid "Home"
 msgstr "Accueil"
 
-#: ../templates/base.html:24 ../templates/base.html:33
-msgid "ServiceList"
-msgstr "Liste de services"
+#: ../templates/base.html:24 ../templates/base.html:36
+msgid "Converter"
+msgstr "Convertisseur"
 
-#: ../templates/base.html:25 ../templates/base.html:34
-msgid "Request Service"
-msgstr "Demander un service"
+#: ../templates/base.html:25 ../templates/base.html:37
+msgid "Guide"
+msgstr "Guide"
 
-#: ../templates/base.html:58
+#: ../templates/base.html:63
 msgid "Issue or Request ?"
 msgstr "Problème ou demande ?"
 
-#: ../templates/base.html:59
+#: ../templates/base.html:64
 msgid "What is this ?"
 msgstr "Qu'est-ce ?"
 
-#: ../templates/index.html:4
-msgid "Beconvert - File Converter"
-msgstr "Beconvert - Converteur de fichier"
+#: ../templates/conversion.html:13
+msgid " to "
+msgstr " vers "
+
+#: ../templates/conversion.html:13
+msgid " Converter"
+msgstr " Convertisseur"
+
+#: ../templates/conversion.html:16
+msgid "Easily convert your "
+msgstr "Convertissez facilement vos "
+
+#: ../templates/conversion.html:16
+msgid " files to "
+msgstr " fichiers vers "
+
+#: ../templates/conversion.html:16
+msgid " format using our online tool."
+msgstr " format en utilisant notre outil en ligne."
+
+#: ../templates/conversion.html:24
+msgid "Input Type"
+msgstr "Type d'Entrée"
+
+#: ../templates/conversion.html:32
+msgid "Output Type"
+msgstr "Type de Sortie"
+
+#: ../templates/conversion.html:44
+msgid "You must upload a file before converting"
+msgstr "Vous devez téléverser un fichier avant de convertir"
+
+#: ../templates/conversion.html:58 ../templates/conversion.html:97
+#: ../templates/index.html:58
+msgid "Convert"
+msgstr "Convertir"
+
+#: ../templates/conversion.html:88 ../templates/index.html:49
+msgid "How it Works"
+msgstr "Comment cela fonctione"
+
+#: ../templates/conversion.html:92 ../templates/index.html:53
+msgid "Select"
+msgstr "Choisissez"
+
+#: ../templates/conversion.html:93 ../templates/index.html:54
+msgid "Select your desired file type using the selection form."
+msgstr "Choisissez votre type de fichier désiré depuis le formulaire de sélection."
+
+#: ../templates/conversion.html:98 ../templates/index.html:59
+msgid "Our service quickly converts your selected file to any document format."
+msgstr ""
+"Notre service convertit rapidement votre fichier désiré en n'importe quel format."
+
+#: ../templates/conversion.html:102 ../templates/index.html:63
+msgid "Download"
+msgstr "Télécharger"
+
+#: ../templates/conversion.html:103 ../templates/index.html:64
+msgid "Download your converted file or preview it directly in your browser."
+msgstr ""
+"Télécharger votre fichier converti ou pré-visualiser le directement dans votre "
+"navigateur."
+
+#: ../templates/conversion.html:189
+msgid "Converting..."
+msgstr "En cours..."
+
+#: ../templates/guide.html:4
+msgid "Guide - Under Construction"
+msgstr "Guide - En Cours de Construction"
+
+#: ../templates/guide.html:12
+msgid "This page is under construction"
+msgstr "Cette page est en cours de construction"
+
+#: ../templates/guide.html:15
+msgid "We’re working hard to bring you this feature soon. Please check back later!"
+msgstr ""
+"Nous faisons tout notre possible pour rendre cette fonctionnalité accessible le "
+"plus tôt possible. Revenez plus tard !"
+
+#: ../templates/guide.html:18
+msgid "Back to Home"
+msgstr "Retour à l'Accueil"
 
 #: ../templates/index.html:8
-msgid "Welcome to Beconvert"
-msgstr "Bienvenue sur Beconvert"
+msgid "Convert "
+msgstr "Convertir "
 
-#: ../templates/index.html:9
-msgid "This is a simple file converter application."
-msgstr "C'est une simple application de conversion de fichiers"
+#: ../templates/index.html:12
+msgid " to PDF instantly"
+msgstr " en PDF immédiatement"
 
+#: ../templates/index.html:15
+msgid "Simple, fast, and free. Convert your "
+msgstr "Simple, rapide et gratuit. Convertissez vos "
+
+#: ../templates/index.html:19
+msgid " files to beautiful PDFs in just a few clicks."
+msgstr " fichiers en de magnifique PDFs en quelques cliques."
+
+#: ../templates/index.html:23
+msgid "Start Converting"
+msgstr "Commencez à Convertir"
+
+#: ../templates/index.html:32
+msgid "Fast & Easy"
+msgstr "Simple & Facile"
+
+#: ../templates/index.html:33
+msgid ""
+"Upload your file and get a converted version instantly. No installation required."
+msgstr ""
+"Téléversez votre fichier et obtenez une version convertie instantanément. Pas "
+"besoin d'installation."
+
+#: ../templates/index.html:36
+msgid "Secure"
+msgstr "Sécurisé"
+
+#: ../templates/index.html:37
+msgid ""
+"Your files are processed securely and are deleted automatically after conversion."
+msgstr ""
+"Vos fichiers sont traités de manière sécurisée et supprimé après utilisation."
+
+#: ../templates/index.html:40
+msgid "Customizable"
+msgstr "Modulable"
+
+#: ../templates/index.html:41
+msgid "Easily customize the output with your preferred style and formatting."
+msgstr ""
+"Moduler et modifier l'apparence de votre document avec vos styles et mises en "
+"forme préférées."
+
+#: ../templates/index.html:73
+msgid "Ready to convert your files?"
+msgstr "Prêt à convertir vos fichiers ?"
+
+#: ../templates/index.html:75
+msgid "Start Converting Now"
+msgstr "Commencez à Convertir Maintenant"

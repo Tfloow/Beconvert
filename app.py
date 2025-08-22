@@ -59,6 +59,11 @@ def conversion(warning=False):
     logger.info(f"Conversion page accessed: {input_type} to {output_type}")
     return render_template("conversion.html", ID=None, FILE_IN=input_type, FILE_OUT=output_type, SupportedFileTypes=SupportedFileTypes, warning=warning)
 
+@app.route("/guide")
+def guide():
+    logger.info("Guide page accessed")
+    return render_template("guide.html")
+
 UPLOAD_FOLDER = "uploads"
 
 # To render PDF files

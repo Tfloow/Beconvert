@@ -58,6 +58,5 @@ You need to first compile this `.po` file into `.mo` with this command:
 pybabel compile -d .
 ```
 
-Then to use the language in the app, you should look for the constant `LANGUAGES` in [`app.py`](../app.py) and add to the list the 2 letters of your language. You also need to add those two letters in the [`base.html`](../templates/base.html) (search in the file there should be already a list).
 
 Run the app and your language and translation should appear automatically.
