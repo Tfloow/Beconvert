@@ -28,11 +28,31 @@ from convert import *
 
 SupportedFileTypes = {
     "Markdown": ".md",
-    "PDF": ".pdf",
+    "CSV": ".csv",
     "HTML": ".html",
     "Word": ".docx",
+    "Jupyter": ".ipynb",
+    "JSON": ".json",
+    "LaTeX": ".tex",
+    "OpenDoc": ".odt",
+    "Rich Text": ".rtf"
+}
+
+SupportedOutputFileTypes_EXTRA = {
+    "Markdown": ".md",
+    "HTML": ".html",
+    "Word": ".docx",
+    "Jupyter": ".ipynb",
+    "JSON": ".json",
+    "LaTeX": ".tex",
+    "OpenDoc": ".odt",
+    "Rich Text": ".rtf",
+    "PDF": ".pdf",
     "PowerPoint": ".pptx"
 }
+
+SupportedOutputFileTypes = SupportedFileTypes.copy()
+SupportedOutputFileTypes.update(SupportedOutputFileTypes_EXTRA)
 
 app = Flask(__name__)
 
@@ -49,7 +69,7 @@ babel = Babel(app, locale_selector=get_locale)
 @app.route("/")
 def index():
     logger.info("Index page accessed")
-    return render_template("index.html", SupportedFileTypes=SupportedFileTypes)
+    return render_template("index.html", SupportedFileTypes=SupportedFileTypes, SupportedOutputFileTypes=SupportedOutputFileTypes)
 
 @app.route("/conversion")
 def conversion(warning=False):
@@ -57,12 +77,18 @@ def conversion(warning=False):
     output_type = request.cookies.get("output_type", "PDF") # default = PDF
 
     logger.info(f"Conversion page accessed: {input_type} to {output_type}")
-    return render_template("conversion.html", ID=None, FILE_IN=input_type, FILE_OUT=output_type, SupportedFileTypes=SupportedFileTypes, warning=warning)
+    return render_template("conversion.html", ID=None, FILE_IN=input_type, FILE_OUT=output_type, SupportedFileTypes=SupportedFileTypes, SupportedOutputFileTypes=SupportedOutputFileTypes, warning=warning)
 
 @app.route("/guide")
 def guide():
     logger.info("Guide page accessed")
     return render_template("guide.html")
+
+@app.route("/info")
+def info():
+    logger.info("Info page accessed")
+    return render_template("guide.html")
+
 
 UPLOAD_FOLDER = "uploads"
 
@@ -95,7 +121,7 @@ def convert(input_format, output_format):
 
     output_file = convert_files(input_format, output_format, ID, filename=uploaded_file.filename)
 
-    return render_template("conversion.html", ID=ID, FILE_IN=input_type, FILE_OUT=output_type, SupportedFileTypes=SupportedFileTypes)
+    return render_template("conversion.html", ID=ID, FILE_IN=input_type, FILE_OUT=output_type, SupportedFileTypes=SupportedFileTypes, SupportedOutputFileTypes=SupportedOutputFileTypes)
     return send_file(
         output_file,
         mimetype="application/pdf",

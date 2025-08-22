@@ -31,7 +31,7 @@
     <div>
         <label for="outputType" class="block font-semibold mb-1">{{ _('Output Type') }}</label>
         <select id="outputType" class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        {% for t in SupportedFileTypes.keys() %}
+        {% for t in SupportedOutputFileTypes.keys() %}
             <option value="{{t}}" {% if t == FILE_OUT %}selected{% endif %}>{{t}}</option>
         {% endfor %}
         </select>

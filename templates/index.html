@@ -9,14 +9,21 @@
       <span id="rotate-text" class="transition-opacity duration-1000 opacity-100">
         Markdown
       </span>
-      {{ _(" to PDF instantly") }}
+      {{ _(" to ") }}
+      <span id="rotate-text-out" class="transition-opacity duration-1000 opacity-100">
+        PowerPoint
+      </span>{{ _(" instantly") }}
     </h1>
     <p class="text-lg sm:text-xl mb-8">
       {{ _("Simple, fast, and free. Convert your ") }}
       <span id="rotate-text-desc" class="transition-opacity duration-1000 opacity-100">
         Markdown
       </span>
-      {{ _(" files to beautiful PDFs in just a few clicks.") }}
+      {{ _(" files to beautiful ") }}
+      <span id="rotate-text-desc-out" class="transition-opacity duration-1000 opacity-100">
+        PowerPoint
+      </span>
+      {{ _(" in just a few clicks.") }}
     </p>
     <a href="/conversion" 
        class="inline-block bg-white text-blue-600 font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition">
@@ -82,9 +89,13 @@
 <script>
   // Supported services dictionary passed from backend
   const services = {{ SupportedFileTypes.keys() | list | tojson }};
+  const services_out = {{ SupportedOutputFileTypes.keys() | list | tojson }};
 
   const rotateMain = document.getElementById("rotate-text");
   const rotateDesc = document.getElementById("rotate-text-desc");
+
+  const rotateMain_out = document.getElementById("rotate-text-out");
+  const rotateDesc_out = document.getElementById("rotate-text-desc-out");
 
   let index = 0;
 
@@ -96,11 +107,21 @@
     rotateDesc.classList.remove("opacity-100");
     rotateDesc.classList.add("opacity-0");
 
+    rotateMain_out.classList.remove("opacity-100");
+    rotateMain_out.classList.add("opacity-0");
+
+    rotateDesc_out.classList.remove("opacity-100");
+    rotateDesc_out.classList.add("opacity-0");
+
     setTimeout(() => {
       // Update text after fade out
-      index = (index + 1) % services.length;
+      index = Math.floor(Math.random() * services.length);
       rotateMain.textContent = services[index].padStart(6, '⠀').padEnd(8, '⠀'); // To make animation smoother
       rotateDesc.textContent = services[index].padStart(6, '⠀').padEnd(8, '⠀');
+
+      index = Math.floor(Math.random() * services_out.length);
+      rotateMain_out.textContent = services_out[index].padStart(6, '⠀').padEnd(8, '⠀');
+      rotateDesc_out.textContent = services_out[index].padStart(6, '⠀').padEnd(8, '⠀');
 
       // Fade in
       rotateMain.classList.remove("opacity-0");
@@ -108,6 +129,12 @@
 
       rotateDesc.classList.remove("opacity-0");
       rotateDesc.classList.add("opacity-100");
+
+      rotateMain_out.classList.remove("opacity-0");
+      rotateMain_out.classList.add("opacity-100");
+
+      rotateDesc_out.classList.remove("opacity-0");
+      rotateDesc_out.classList.add("opacity-100");
     }, 1000); // matches Tailwind duration-1000 (1s fade)
   }
   rotateText();
