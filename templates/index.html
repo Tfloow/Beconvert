@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-blue-500 to-gray-800 text-white py-20">
+    <div class="max-w-4xl mx-auto text-center px-4">
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">{{ _("Convert Markdown to PDF instantly") }}</h1>
+        <p class="text-lg sm:text-xl mb-8">{{ _("Simple, fast, and free. Convert your Markdown files to beautiful PDFs in just a few clicks.") }}</p>
+        <a href="/conversion" class="inline-block bg-white text-blue-600 font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition">
+            {{ _("Start Converting") }}
+        </a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+        <div class="p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-2">{{ _("Fast & Easy") }}</h3>
+            <p>{{ _("Upload your Markdown file and get a PDF instantly. No installation required.") }}</p>
+        </div>
+        <div class="p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-2">{{ _("Secure") }}</h3>
+            <p>{{ _("Your files are processed securely and are deleted automatically after conversion.") }}</p>
+        </div>
+        <div class="p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
+            <h3 class="text-xl font-bold mb-2">{{ _("Customizable") }}</h3>
+            <p>{{ _("Easily customize the PDF output with your preferred style and formatting.") }}</p>
+        </div>
+    </div>
+</section>
+
+<!-- How it Works Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-extrabold mb-12">{{ _("How it Works") }}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div class="p-6 border rounded-lg hover:shadow-lg transition">
+                <span class="text-4xl mb-4 block">📄</span>
+                <h3 class="font-bold mb-2">{{ _("Upload") }}</h3>
+                <p>{{ _("Select your Markdown file using the upload form.") }}</p>
+            </div>
+            <div class="p-6 border rounded-lg hover:shadow-lg transition">
+                <span class="text-4xl mb-4 block">⚡</span>
+                <h3 class="font-bold mb-2">{{ _("Convert") }}</h3>
+                <p>{{ _("Our service quickly converts your Markdown to a PDF document.") }}</p>
+            </div>
+            <div class="p-6 border rounded-lg hover:shadow-lg transition">
+                <span class="text-4xl mb-4 block">🎉</span>
+                <h3 class="font-bold mb-2">{{ _("Download") }}</h3>
+                <p>{{ _("Download your PDF or preview it directly in your browser.") }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="bg-gradient-to-r to-blue-600 from-gray-800 text-white py-20">
+    <div class="max-w-4xl mx-auto text-center px-4">
+        <h2 class="text-3xl sm:text-4xl font-extrabold mb-6">{{ _("Ready to convert your Markdown files?") }}</h2>
+        <a href="/conversion" class="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-lg shadow-lg hover:bg-gray-100 transition">
+            {{ _("Start Converting Now") }}
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>{{ _('Beconvert - Markdown to PDF') }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-12">
+
+    <!-- Page Heading -->
+    <div class="text-center mb-10">
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">{{ _('Markdown to PDF Converter') }}</h1>
+        <p class="text-lg text-gray-700">{{ _('Easily convert your markdown files to PDF format using our online tool.') }}</p>
+    </div>
+
+    <!-- Upload Form -->
+    <div class="bg-white p-8 rounded-lg shadow-md border border-gray-200 mb-10">
+        <form action="/markdown-pdf" method="post" enctype="multipart/form-data" class="flex flex-col sm:flex-row items-center gap-4">
+            <input type="file" name="file" accept=".md" class="border rounded-md px-3 py-2 w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-blue-700 transition">
+                {{ _('Convert') }}
+            </button>
+        </form>
+    </div>
+
+    <!-- PDF Preview -->
+    {% if ID %}
+        <div class="flex justify-center">
+            <iframe 
+                src="{{ url_for('uploaded_file', ID=ID, filename='output.pdf') }}" 
+                width="100%" 
+                height="600" 
+                class="border rounded-lg shadow-lg"
+            ></iframe>
+        </div>
+    {% endif %}
+
+    <!-- How It Works -->
+    <div class="mt-16">
+        <h2 class="text-2xl font-bold mb-6 text-center">{{ _('How it Works') }}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+            <div class="p-6 bg-gray-50 rounded-lg shadow hover:shadow-lg transition">
+                <span class="text-4xl mb-2 block">📄</span>
+                <h3 class="font-bold mb-2">{{ _('Upload') }}</h3>
+                <p>{{ _('Select your Markdown file using the form above.') }}</p>
+            </div>
+            <div class="p-6 bg-gray-50 rounded-lg shadow hover:shadow-lg transition">
+                <span class="text-4xl mb-2 block">⚡</span>
+                <h3 class="font-bold mb-2">{{ _('Convert') }}</h3>
+                <p>{{ _('Our tool converts your Markdown to PDF instantly.') }}</p>
+            </div>
+            <div class="p-6 bg-gray-50 rounded-lg shadow hover:shadow-lg transition">
+                <span class="text-4xl mb-2 block">🎉</span>
+                <h3 class="font-bold mb-2">{{ _('Download & Preview') }}</h3>
+                <p>{{ _('View your PDF below or download it for later use.') }}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

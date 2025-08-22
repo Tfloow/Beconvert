@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% block head %}
+    <title>Beconvert - Your partner for branding</title>
+    <link rel="icon" type="image/x-icon" href="/static/ico/icoDOWN.png">
+    {% endblock %}
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="Convert easily your markdown files to pdf">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Sidebar -->
+    <div id="mySidenav" class="fixed top-0 left-0 h-full w-64 bg-gray-900 text-white transform -translate-x-full transition-transform duration-300 z-50">
+        <button class="p-4 focus:outline-none" onclick="closeNav()">&times;</button>
+        <nav class="flex flex-col space-y-4 mt-6 px-4">
+            <a href="/" class="hover:bg-gray-700 p-2 rounded font-bold">{{ _("Home") }}</a>
+            <a href="/conversion" class="hover:bg-gray-700 p-2 rounded font-bold">{{ _("Markdown to PDF") }}</a>
+            <a href="/info" class="hover:bg-gray-700 p-2 rounded font-bold">Info</a>
+        </nav>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            
+            <!-- Left buttons -->
+            <div class="flex space-x-4">
+                <a href="/" class="px-3 py-2 rounded-md hover:bg-gray-200 font-bold">{{ _("Home") }}</a>
+                <a href="/conversion" class="px-3 py-2 rounded-md hover:bg-gray-200 font-bold">{{ _("Markdown to PDF") }}</a>
+                <a href="/info" class="px-3 py-2 rounded-md hover:bg-gray-200 font-bold">Info</a>
+            </div>
+
+            <!-- Right buttons -->
+            <div class="flex space-x-4 items-center">
+                <!--<select name="Language" id="language-select" class="border rounded px-2 py-1">
+                    {% for lang in ["en", "fr"] %}
+                        <option value="{{ lang }}" {% if lang == get_locale %}selected{% endif %}>{{ lang }}</option>
+                    {% endfor %}
+                </select>-->
+                <a href="https://github.com/Tfloow/UCLouvainDown" class="px-3 py-2 rounded-md hover:bg-gray-200 font-bold">Github</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer sticks to bottom -->
+    <footer class="bg-gray-800 text-gray-200 py-4 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center text-sm">
+            <p class="flex flex-wrap gap-2">
+                <a href="https://github.com/Tfloow/UCLouvainDown" class="hover:underline">Github</a> -
+                <a href="https://github.com/Tfloow/UCLouvainDown/issues" class="hover:underline">{{ _("Issue or Request ?") }}</a> -
+                <a href="https://github.com/Tfloow/UCLouvainDown#introduction" class="hover:underline">{{ _("What is this ?") }}</a> - 
+                <a href="/info" class="hover:underline">Info</a>
+            </p>
+            <p class="mt-2 sm:mt-0">&copy; 2025 Beconvert</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='script/languageSelection.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/sideBar.js') }}"></script>
+    {% block script %}
+    {% endblock %}
+
+</body>
+</html>

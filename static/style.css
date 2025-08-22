@@ -1,0 +1,165 @@
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+
+    text-align: center;
+    flex-direction: column;
+
+    min-height: 100vh;
+}
+
+#header {
+    color: white;
+    background-color: rgb(0, 12, 51);
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distribute space between items */
+}
+
+#language-select{
+    border-style: none;
+    background-color: rgb(0, 12, 51);
+    color: white;
+
+    cursor: pointer;
+
+    margin: 0;
+    transition: 300ms;
+}
+
+#language-select:hover{
+    background-color: rgb(38, 51, 95);
+}
+
+#language-select:after{
+    transition: 200ms;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+#right-buttons{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header-button {
+    color: white;
+    padding: 10px;
+    margin: 0;
+    transition: 300ms;
+}
+
+a.header-button {
+    color: white;
+    text-decoration: none;
+    transition: 300ms;
+}
+
+.header-button:hover {
+    background-color: rgb(38, 51, 95);
+    cursor: pointer;
+    transition: 300ms;
+}
+
+#title {
+    padding: 0;
+    margin: 0;
+    text-align: center; /* Center the title */
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+
+
+/*For mobile*/
+@media (max-width: 600px) {
+    .header-button{
+        width:60px;
+        font-size: 13px;
+    }
+}
+
+footer{
+    text-align: center;
+    color: rgb(121, 121, 121);
+
+    margin-top: auto;
+}
+
+footer.github-footer{
+    color: rgb(121, 121, 121);
+}
+
+.github-footer{
+    color: rgb(121, 121, 121);
+}
+
+a.github-footer{
+    color: rgb(121, 121, 121);
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 12, 51);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    text-align:center;
+  }
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+
+}
+
+.sidenav a:hover{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+
+}
+
+#menu{
+    font-size:20px;
+    cursor:pointer;
+    transition-duration: 300ms;
+
+    transition-timing-function: ease-in-out;
+}
+
+#menu:hover{
+    rotate: 180deg;
+    transition-duration: 200ms;
+
+    transition-timing-function: ease-in-out;
+
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
