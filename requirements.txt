@@ -5,3 +5,4 @@ apscheduler
 lock
 FileLock
 gunicorn
+pandoc # since render doesn't let me run docker

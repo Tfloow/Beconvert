@@ -4,6 +4,7 @@ import random
 import os
 import time
 import shutil
+import pandoc
 
 TYPE_EXTENSION = {
     "markdown": "md",
@@ -30,10 +31,13 @@ def convert_files(type_in, type_out,ID):
         print("Unsupported conversion types")
         return None
 
-    # Call the conversion tool (e.g., pandoc) here
-    PWD = os.getcwd()
-    docker=f"docker run --rm --volume {PWD}/uploads/{ID}:/data pandoc/extra input.{input_ext} -o output.{output_ext}" #--template eisvogel --listings --number-sections"
-    result = subprocess.run(docker, shell=True, capture_output=True)
+    PANDOC_DOCKER = True
+    if PANDOC_DOCKER:
+        # Call the conversion tool (e.g., pandoc) here
+        PWD = os.getcwd()
+        docker=f"docker run --rm --volume {PWD}/uploads/{ID}:/data pandoc/extra input.{input_ext} -o output.{output_ext}" #--template eisvogel --listings --number-sections"
+        result = subprocess.run(docker, shell=True, capture_output=True)
+        
     #print(result.stdout.decode("utf-8"))
     #print(result.stderr.decode("utf-8"))
 
