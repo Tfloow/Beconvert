@@ -1,5 +1,10 @@
-#!/bin/sh
-# Install dependencies
-pip install -r requirements.txt
-lsb_release -i
-apt install docker
+#!/bin/bash
+set -e
+
+echo "Installing system dependencies..."
+
+
+# Install Python dependencies
+pip install --no-cache-dir -r requirements.txt
+
+echo "All dependencies installed."

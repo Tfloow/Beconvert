@@ -4,7 +4,7 @@ import random
 import os
 import time
 import shutil
-import pandoc
+from logger_config import *
 
 TYPE_EXTENSION = {
     "markdown": "md",
@@ -31,15 +31,20 @@ def convert_files(type_in, type_out,ID):
         print("Unsupported conversion types")
         return None
 
-    PANDOC_DOCKER = True
+    PANDOC_DOCKER = False
+    PWD = os.getcwd()
     if PANDOC_DOCKER:
         # Call the conversion tool (e.g., pandoc) here
-        PWD = os.getcwd()
-        docker=f"docker run --rm --volume {PWD}/uploads/{ID}:/data pandoc/extra input.{input_ext} -o output.{output_ext}" #--template eisvogel --listings --number-sections"
-        result = subprocess.run(docker, shell=True, capture_output=True)
         
-    #print(result.stdout.decode("utf-8"))
-    #print(result.stderr.decode("utf-8"))
+        cmd=f"docker run --rm --volume {PWD}/uploads/{ID}:/data pandoc/extra input.{input_ext} -o output.{output_ext}" #--template eisvogel --listings --number-sections"
+    else:
+        cmd=f"pandoc uploads/{ID}/input.{input_ext} -o uploads/{ID}/output.{output_ext}"# --pdf-engine=xelatex --template eisvogel --listings --number-sections"
+    
+    logger.info(PWD)
+    result = subprocess.run(cmd, shell=True, capture_output=True)
+
+    logger.info(result.stdout.decode("utf-8"))
+    logger.error(result.stderr.decode("utf-8"))
 
     # Return pdf
     return f"uploads/{ID}/output.{output_ext}"

@@ -33,6 +33,12 @@
                 class="border rounded-lg shadow-lg"
             ></iframe>
         </div>
+    {% else %}
+        <div class="flex justify-center">
+            <div class="w-full h-60 flex items-center justify-center border-2 border-dashed rounded-lg shadow-sm bg-gray-50 text-gray-500">
+                <p class="text-lg font-medium">Your converted file will appear here after upload</p>
+            </div>
+        </div>
     {% endif %}
 
     <!-- How It Works -->
