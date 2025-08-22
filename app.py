@@ -26,7 +26,13 @@ import datetime as dt
 from logger_config import *
 from convert import *
 
-
+SupportedFileTypes = {
+    "Markdown": ".md",
+    "PDF": ".pdf",
+    "HTML": ".html",
+    "Word": ".docx",
+    "PowerPoint": ".pptx"
+}
 
 app = Flask(__name__)
 
@@ -43,15 +49,19 @@ babel = Babel(app, locale_selector=get_locale)
 @app.route("/")
 def index():
     logger.info("Index page accessed")
-    return render_template("index.html")
+    return render_template("index.html", SupportedFileTypes=SupportedFileTypes)
 
 @app.route("/conversion")
-def conversion():
-    logger.info("Conversion page accessed")
-    return render_template("conversion.html", ID=None)
+def conversion(warning=False):
+    input_type = request.cookies.get("input_type", "Markdown")   # default = Markdown
+    output_type = request.cookies.get("output_type", "PDF") # default = PDF
+
+    logger.info(f"Conversion page accessed: {input_type} to {output_type}")
+    return render_template("conversion.html", ID=None, FILE_IN=input_type, FILE_OUT=output_type, SupportedFileTypes=SupportedFileTypes, warning=warning)
 
 UPLOAD_FOLDER = "uploads"
 
+# To render PDF files
 @app.route("/uploads/<ID>/<filename>")
 def uploaded_file(ID, filename):
     folder = os.path.join(UPLOAD_FOLDER, ID)
@@ -62,22 +72,25 @@ def uploaded_file(ID, filename):
         abort(404)
 
 # URL /FROM-TO format will pick input to output format
-@app.route("/<input_format>-<output_format>", methods=["POST"])
+@app.route("/convert/<input_format>-<output_format>", methods=["POST"])
 def convert(input_format, output_format):
     logger.info(f"Conversion requested: {input_format} to {output_format}")
     
     uploaded_file = request.files["file"]
     if uploaded_file.filename == "":
-        return "No file selected", 400
+        return conversion(warning=True)
     
     ID = new_conversion_ID()
     
     # Save to disk
-    uploaded_file.save(f"uploads/{ID}/input.md")
+    uploaded_file.save(f"uploads/{ID}/{uploaded_file.filename}")
 
-    output_file = convert_files(input_format, output_format, ID)
-    
-    return render_template("conversion.html", ID=ID)
+    input_type = request.cookies.get("input_type", "Markdown")   # default = Markdown
+    output_type = request.cookies.get("output_type", "PDF") # default = PDF
+
+    output_file = convert_files(input_format, output_format, ID, filename=uploaded_file.filename)
+
+    return render_template("conversion.html", ID=ID, FILE_IN=input_type, FILE_OUT=output_type, SupportedFileTypes=SupportedFileTypes)
     return send_file(
         output_file,
         mimetype="application/pdf",
