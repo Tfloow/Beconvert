@@ -28,7 +28,7 @@ from convert import *
 
 
 
-app = Flask("Beconvert")
+app = Flask(__name__)
 
 LANGUAGES=["en"]
 wanted_language = None
