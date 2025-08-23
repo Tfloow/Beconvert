@@ -51,6 +51,27 @@ def convert_files(type_in, type_out,ID, filename="input.md"):
         logger.error(f"Conversion failed: uploads/{ID}/output{output_ext} not found")
         return False
 
+def create_invoice_pdf(ID):
+    logger.warning("Dummy invoice")
+    pwd = os.getcwd()
+    logger.info(f"PWD {pwd}")
+    cmd=f"cd pandoc-templates/invoice; make {ID}"
+    
+    result = subprocess.run(cmd, shell=True, capture_output=True)
+
+    logger.info(result.stdout)
+    for line in result.stdout.splitlines():
+        logger.info(f"STDOUT: {line}")
+    if result.stderr:
+        logger.error(result.stderr)
+
+    if os.path.exists(f"uploads/{ID}/output.pdf"):
+        logger.info(f"Invoice created successfully: uploads/{ID}/output.pdf")
+        return f"uploads/{ID}/output.pdf"
+    else:
+        logger.error(f"Conversion failed: uploads/{ID}/output.pdf not found")
+        return False
+
 # Remove folders created over 24 hours ago
 HOUR_OLD = 0.1
 def remove_old_uploads():

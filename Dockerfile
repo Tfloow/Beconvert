@@ -4,7 +4,7 @@ FROM python:3.12-slim
 
 # Install system dependencies
 RUN apt-get update && \
-    apt-get install -y curl tar texlive pandoc && \
+    apt-get install -y curl tar texlive-latex-extra texlive-lang-greek pandoc texlive-xetex make && \
     rm -rf /var/lib/apt/lists/*
 
 # Set working directory
@@ -17,13 +17,11 @@ COPY . .
 # Inspired by pandoc/extra
 ENV PANDOC_DATA_HOME=/usr/local/share/pandoc
 ENV PANDOC_TEMPLATES_DIR=/usr/local/share/pandoc/templates
-RUN mkdir -p ${PANDOC_TEMPLATES_DIR} # buildkit
 
 # Invoice zip archive
 ENV INVOICE_ARCHIVE=https://github.com/mrzool/invoice-boilerplate/archive/master.zip
 
-RUN wget ${INVOICE_ARCHIVE} | tar xz --strip-components=1 --one-top-level=${PANDOC_TEMPLATES_DIR} Eisvogel-3.2.0/eisvogel.latex Eisvogel-3.2.0/eisvogel.beamer # buildkit
-
+RUN cd pandoc-templates/invoice; make; cat *.log
 
 
 

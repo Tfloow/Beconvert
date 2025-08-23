@@ -2,5 +2,8 @@ __pycache__
 .venv
 *.log
 uploads/
+!uploads/00000-00000-00000-00000-00000
+!uploads/00000-00000-00000-00000-00000/details.yml
 *.lock
 *.tar.gz
+

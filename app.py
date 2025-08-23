@@ -94,7 +94,7 @@ def info():
 @app.route("/invoice")
 def invoice():
     logger.info("Invoice page accessed")
-    return render_template("guide.html")
+    return render_template("invoice.html")
 
 @app.route("/shipping")
 def shipping_label():
@@ -143,6 +143,16 @@ def convert(input_format, output_format):
         as_attachment=False,   # forces download
         download_name=f"{uploaded_file.filename.split('.')[0]}_by_Beconvert.pdf"  # filename shown to user
     )
+    
+@app.route("/invoice/create", methods=["POST"])
+def create_invoice():
+    logger.info("Create invoice requested")
+    ID = "00000-00000-00000-00000-00000"
+    filepath = create_invoice_pdf(ID)
+
+    if not filepath:
+        return render_template("invoice.html", ID=None, error=True)
+    return render_template("invoice.html", ID=ID)
 
 # Setup Scheduler to periodically check the status of the website
 # When the scheduler need to be stopped
