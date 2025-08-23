@@ -4,8 +4,17 @@ FROM python:3.12-slim
 
 # Install system dependencies
 RUN apt-get update && \
-    apt-get install -y curl tar texlive-latex-extra texlive-lang-greek pandoc texlive-xetex texlive-science make && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y \
+        curl tar make \
+        texlive-xetex \
+        texlive-latex-base \
+        texlive-lang-greek \
+        texlive-latex-recommended \
+        texlive-latex-extra \
+        texlive-fonts-recommended \
+        texlive-science \
+        pandoc \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
