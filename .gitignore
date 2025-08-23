@@ -6,4 +6,4 @@ uploads/
 !uploads/00000-00000-00000-00000-00000/details.yml
 *.lock
 *.tar.gz
-
+.env

@@ -26,6 +26,10 @@ import datetime as dt
 from logger_config import *
 from convert import *
 
+from dotenv import load_dotenv
+# Load .env into process environment
+load_dotenv()
+
 SupportedFileTypes = {
     "Markdown": ".md",
     "CSV": ".csv",
@@ -65,6 +69,20 @@ def get_locale():
 
 babel = Babel(app, locale_selector=get_locale)
 
+def cookie_premium_check():
+    cookie = request.cookies.get("PRO_KEY", None)
+    PRO_ACCESS = os.getenv("SECRET_KEY_PRO_FEATURES", None)
+
+    logger.info(f"Cookie: {cookie}, Env: {PRO_ACCESS}")
+
+    if cookie != PRO_ACCESS:
+        logger.warning("User is not premium")
+        PRO_ACCESS = False
+    else:
+        PRO_ACCESS = True
+        logger.info("User is premium")
+
+    return PRO_ACCESS
 
 @app.route("/")
 def index():
@@ -92,9 +110,12 @@ def info():
     return render_template("guide.html")
 
 @app.route("/invoice")
-def invoice(warning=False):
+def invoice(ID=None, error=False,warning=False, file_out_type=".pdf"):
     logger.info("Invoice page accessed")
-    return render_template("invoice.html", ID=None, warning=warning)
+    # Check .env file and compare with saved cookie
+    PRO_ACCESS = cookie_premium_check()
+
+    return render_template("invoice.html", ID=ID, error=error, warning=warning, PRO_ACCESS=PRO_ACCESS, SupportedOutputFileTypes=SupportedOutputFileTypes, file_out_type=file_out_type)
 
 @app.route("/shipping")
 def shipping_label():
@@ -147,25 +168,33 @@ def convert(input_format, output_format):
 @app.route("/invoice/create", methods=["POST"])
 def create_invoice():
     logger.info("Create invoice requested")
-    
+
+
     uploaded_file = request.files["file"]
     if uploaded_file.filename == "":
         logger.info("Empty invoice file")
         return invoice(warning=True)
     
+    PRO_ACCESS = cookie_premium_check()
     ID = new_conversion_ID()
+
+    extension_out = SupportedOutputFileTypes[request.cookies.get("output_type_invoice", "PDF")] # default = PDF
     
+    if not PRO_ACCESS and extension_out != ".pdf":
+        logger.warning("User is not premium and requested non-PDF output")
+        extension_out = ".pdf"
+
     # Save to disk
     extension = uploaded_file.filename.split(".")[-1]
     uploaded_file.save(f"uploads/{ID}/input.{extension}")
 
-    filepath = create_invoice_pdf(ID, extension_in=extension)
+    filepath = create_invoice_pdf(ID, extension_in=extension, extension_out=extension_out)
 
     if not filepath:
-        return render_template("invoice.html", ID=None, error=True)
+        return invoice(error=True)
     
     ID = filepath.split("/")[-2]
-    return render_template("invoice.html", ID=ID)
+    return invoice(ID=ID, file_out_type=extension_out)
 
 # Setup Scheduler to periodically check the status of the website
 # When the scheduler need to be stopped
