@@ -72,6 +72,17 @@ babel = Babel(app, locale_selector=get_locale)
 def cookie_premium_check():
     cookie = request.cookies.get("PRO_KEY", None)
     PRO_ACCESS = os.getenv("SECRET_KEY_PRO_FEATURES", None)
+    
+    if PRO_ACCESS is not None:
+        return PRO_ACCESS
+    
+    # If not found, check /etc/secrets
+    secret_path = "/etc/secrets/.env"
+    if os.path.exists(secret_path):
+        with open(secret_path, "r") as f:
+            PRO_ACCESS = f.read().split("=")[1].strip('"')
+    else:
+        PRO_ACCESS = False
 
     logger.info(f"Cookie: {cookie}, Env: {PRO_ACCESS}")
 
