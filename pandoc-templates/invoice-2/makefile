@@ -10,8 +10,7 @@ output.pdf : $(src)
 	$(TEX) $< -o $@ $(FLAGS)
 
 %: header.md ../../uploads/%/input.md
-	$(TEX) $^ -o ../../uploads/$@/output.tex $(FLAGS)
-	$(TEX) ../../uploads/$@/output.tex -o ../../uploads/$@/output$(OUTPUT_FILE_TYPE)
+	$(TEX) $^ -o ../../uploads/$@/output$(OUTPUT_FILE_TYPE) $(FLAGS)
 
 .PHONY: clean
 clean :
