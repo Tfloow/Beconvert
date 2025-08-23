@@ -4,7 +4,7 @@ FROM python:3.12-slim
 
 # Install system dependencies
 RUN apt-get update && \
-    apt-get install -y curl tar texlive-latex-extra texlive-lang-greek pandoc texlive-xetex make && \
+    apt-get install -y curl tar texlive-latex-extra texlive-lang-greek pandoc texlive-xetex texlive-science make && \
     rm -rf /var/lib/apt/lists/*
 
 # Set working directory
