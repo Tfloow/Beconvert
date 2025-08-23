@@ -21,7 +21,7 @@ ENV PANDOC_TEMPLATES_DIR=/usr/local/share/pandoc/templates
 # Invoice zip archive
 ENV INVOICE_ARCHIVE=https://github.com/mrzool/invoice-boilerplate/archive/master.zip
 
-RUN cd pandoc-templates/invoice; make; cat *.log
+#RUN cd pandoc-templates/invoice; make; cat *.log
 
 
 
