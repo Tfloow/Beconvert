@@ -1,18 +1,17 @@
 # Base image (Debian slim + Python)
 FROM python:3.12-slim
 
+#texlive-lang-greek \
+#        texlive-latex-recommended \
+#        texlive-latex-extra \
+#        texlive-fonts-recommended \
+#        texlive-science \
 
 # Install system dependencies
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt-get update
+RUN apt-get install -y \
         curl tar make \
-        texlive-xetex \
-        texlive-latex-base \
-        texlive-lang-greek \
         texlive-latex-recommended \
-        texlive-latex-extra \
-        texlive-fonts-recommended \
-        texlive-science \
         pandoc \
     && rm -rf /var/lib/apt/lists/*
 

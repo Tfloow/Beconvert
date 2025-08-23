@@ -16,8 +16,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {% block head %}
     <title>Beconvert - Your partner for branding</title>
-    <link rel="icon" type="image/x-icon" href="/static/ico/icoDOWN.png">
     {% endblock %}
+    <link rel="icon" type="image/x-icon" href="/static/ico/logo_beconvert.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="description" content="Convert easily your markdown files to pdf">
@@ -41,9 +41,14 @@
     <header class="bg-white shadow-md sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
             
+            <!-- Left part: Logo + buttons -->
+            <div class="flex items-center space-x-4">
+                <!-- Logo with rounded corners -->
+                <a href="/">
+                    <img src="{{ url_for('static', filename='ico/logo_beconvert.png') }}" alt="BeConvert Logo" class="h-10 w-auto rounded-md">
+                </a>
 
-            <!-- Left buttons -->
-            <div class="flex space-x-4">
+                <!-- Navigation buttons -->
                 <a href="/" class="px-3 py-2 rounded-md hover:bg-gray-200 font-bold">{{ _("Home") }}</a>
                 <a href="/conversion" class="px-3 py-2 rounded-md hover:bg-gray-200 font-bold">{{ _("Converter") }}</a>
                 <a href="/guide" class="px-3 py-2 rounded-md hover:bg-gray-200 font-bold">{{ _("Guide") }}</a>
@@ -80,8 +85,10 @@
                 </select>-->
                 <a href="https://github.com/Tfloow/Beconvert" class="px-3 py-2 rounded-md hover:bg-gray-200 font-bold">Github</a>
             </div>
+
         </div>
     </header>
+
 
     <!-- Main content -->
     <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">

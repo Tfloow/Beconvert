@@ -12,7 +12,9 @@ This tool serves as an open-source, easy to use and eye catching website to conv
 ## Roadmap
 
 - [x] support markdown to pdf conversion
-- [ ] support markdown to any supported file with an appealing selection menu
-- [ ] offer word, ... as input
+- [x] support markdown to any supported file with an appealing selection menu
+- [x] offer word, ... as input
+- [ ] offer invoice
+  - [ ] Support and sanitize spreadsheet and pack it inside the tool
 - [ ] offer branding solutions using eisvogel and other pandoc templates
 - [ ] offer quote and other business solutions 

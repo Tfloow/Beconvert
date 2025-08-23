@@ -51,11 +51,11 @@ def convert_files(type_in, type_out,ID, filename="input.md"):
         logger.error(f"Conversion failed: uploads/{ID}/output{output_ext} not found")
         return False
 
-def create_invoice_pdf(ID):
-    logger.warning("Dummy invoice")
-    pwd = os.getcwd()
-    logger.info(f"PWD {pwd}")
-    cmd=f"cd pandoc-templates/invoice; make {ID}"
+def create_invoice_pdf(ID, extension_in="md"):
+    if extension_in != "md":
+        logger.warning("Dummy invoice - TODO")
+        ID = "00000-00000-00000-00000-00000-DBG"
+    cmd=f"cd pandoc-templates/invoice-2; make {ID}"
     
     result = subprocess.run(cmd, shell=True, capture_output=True)
 
@@ -82,6 +82,7 @@ def remove_old_uploads():
             if os.path.isdir(folder_path):
                 folder_creation_time = os.path.getctime(folder_path)
                 if now - folder_creation_time > HOUR_OLD * 60 * 60:  # 24 hours in seconds
-                    shutil.rmtree(folder_path)
+                    if "00000-00000-00000-00000-00000-DBG" not in folder_path:
+                        shutil.rmtree(folder_path)
     except:
         os.mkdir("uploads")

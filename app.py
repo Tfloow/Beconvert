@@ -92,9 +92,9 @@ def info():
     return render_template("guide.html")
 
 @app.route("/invoice")
-def invoice():
+def invoice(warning=False):
     logger.info("Invoice page accessed")
-    return render_template("invoice.html")
+    return render_template("invoice.html", ID=None, warning=warning)
 
 @app.route("/shipping")
 def shipping_label():
@@ -147,11 +147,24 @@ def convert(input_format, output_format):
 @app.route("/invoice/create", methods=["POST"])
 def create_invoice():
     logger.info("Create invoice requested")
-    ID = "00000-00000-00000-00000-00000"
-    filepath = create_invoice_pdf(ID)
+    
+    uploaded_file = request.files["file"]
+    if uploaded_file.filename == "":
+        logger.info("Empty invoice file")
+        return invoice(warning=True)
+    
+    ID = new_conversion_ID()
+    
+    # Save to disk
+    extension = uploaded_file.filename.split(".")[-1]
+    uploaded_file.save(f"uploads/{ID}/input.{extension}")
+
+    filepath = create_invoice_pdf(ID, extension_in=extension)
 
     if not filepath:
         return render_template("invoice.html", ID=None, error=True)
+    
+    ID = filepath.split("/")[-2]
     return render_template("invoice.html", ID=ID)
 
 # Setup Scheduler to periodically check the status of the website
