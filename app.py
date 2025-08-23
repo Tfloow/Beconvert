@@ -42,7 +42,8 @@ SupportedFileTypes = {
     "RichText": ".rtf"
 }
 
-SupportedOutputFileTypes_EXTRA = {
+SupportedOutputFileTypes = {
+    "PDF": ".pdf",
     "Markdown": ".md",
     "HTML": ".html",
     "Word": ".docx",
@@ -51,12 +52,8 @@ SupportedOutputFileTypes_EXTRA = {
     "LaTeX": ".tex",
     "OpenDoc": ".odt",
     "RichText": ".rtf",
-    "PDF": ".pdf",
     "PowerPoint": ".pptx"
 }
-
-SupportedOutputFileTypes = SupportedFileTypes.copy()
-SupportedOutputFileTypes.update(SupportedOutputFileTypes_EXTRA)
 
 app = Flask(__name__)
 
