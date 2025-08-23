@@ -79,6 +79,8 @@ def conversion(warning=False):
     logger.info(f"Conversion page accessed: {input_type} to {output_type}")
     return render_template("conversion.html", ID=None, FILE_IN=input_type, FILE_OUT=output_type, SupportedFileTypes=SupportedFileTypes, SupportedOutputFileTypes=SupportedOutputFileTypes, warning=warning)
 
+# Todo
+
 @app.route("/guide")
 def guide():
     logger.info("Guide page accessed")
@@ -87,6 +89,16 @@ def guide():
 @app.route("/info")
 def info():
     logger.info("Info page accessed")
+    return render_template("guide.html")
+
+@app.route("/invoice")
+def invoice():
+    logger.info("Invoice page accessed")
+    return render_template("guide.html")
+
+@app.route("/shipping")
+def shipping_label():
+    logger.info("Shipping label page accessed")
     return render_template("guide.html")
 
 

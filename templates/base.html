@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PPT2ERHK05"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PPT2ERHK05');
+    </script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {% block head %}
@@ -30,11 +41,34 @@
     <header class="bg-white shadow-md sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
             
+
             <!-- Left buttons -->
             <div class="flex space-x-4">
                 <a href="/" class="px-3 py-2 rounded-md hover:bg-gray-200 font-bold">{{ _("Home") }}</a>
                 <a href="/conversion" class="px-3 py-2 rounded-md hover:bg-gray-200 font-bold">{{ _("Converter") }}</a>
                 <a href="/guide" class="px-3 py-2 rounded-md hover:bg-gray-200 font-bold">{{ _("Guide") }}</a>
+
+                <!-- Professional dropdown -->
+                <div class="relative">
+                    <button id="prof-btn" class="flex items-center px-3 py-2 rounded-md hover:bg-gray-200 font-bold">
+                        {{ _("Professional") }}
+                        <!-- Down arrow -->
+                        <svg id="prof-arrow" class="w-4 h-4 ml-1 transition-transform duration-300 ease-in-out"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="prof-menu" class="absolute hidden bg-white shadow-md rounded-md mt-1">
+                        <a href="/invoice" class="block rounded-t-md px-4 py-2 bg-gray-200 hover:bg-gray-300">
+                            {{ _("Invoice") }}
+                        </a>
+                        <a href="/shipping" class="block rounded-b-md px-4 py-2 bg-gray-200 hover:bg-gray-300">
+                            {{ _("Shipping Label") }}
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <!-- Right buttons -->
@@ -69,6 +103,25 @@
     </footer>
 
     <!-- Scripts -->
+    <script>
+        const profBtn = document.getElementById("prof-btn");
+        const profMenu = document.getElementById("prof-menu");
+        const profArrow = document.getElementById("prof-arrow");
+
+        profBtn.addEventListener("click", () => {
+            profMenu.classList.toggle("hidden");
+            profArrow.classList.toggle("rotate-180");
+        });
+
+        // Optional: close when clicking outside
+        document.addEventListener("click", (e) => {
+            if (!profBtn.contains(e.target) && !profMenu.contains(e.target)) {
+                profMenu.classList.add("hidden");
+                profArrow.classList.remove("rotate-180");
+            }
+        });
+    </script>
+
     {% block script %}
     {% endblock %}
 
